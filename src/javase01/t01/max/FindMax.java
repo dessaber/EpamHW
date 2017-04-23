@@ -28,14 +28,14 @@ public class FindMax {
         double[] doubles;
         int arrayLength;
         try {
-            System.out.println("Input amount of real numbers first (gotta be > 0).");
+            System.out.println("Input n (gotta be > 0).");
             while (true) {
                 arrayLength = Integer.parseInt(reader.readLine());
                 if (arrayLength > 0)
                     break;
             }
-            doubles = new double[arrayLength];
-            for (int i = 0; i < arrayLength; ++i) {
+            doubles = new double[2*arrayLength];
+            for (int i = 0; i < doubles.length; ++i) {
                 doubles[i] = Double.parseDouble(reader.readLine());
             }
         } catch (IOException | NumberFormatException e) {
@@ -58,9 +58,7 @@ public class FindMax {
         if (doubles.length == 0) {
             System.out.println("Nothing to count");
             return;
-        } else if (doubles.length == 1)
-            System.out.println("The answer is " + doubles[0]);
-        else {
+        } else {
             currentMax = doubles[0] + doubles[doubles.length - 1];
             double tempVariable;
             for (int i = 1; i < doubles.length/2; i++) {

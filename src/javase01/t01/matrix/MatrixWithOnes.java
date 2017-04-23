@@ -10,6 +10,8 @@ public class MatrixWithOnes {
 
     private byte[][] matrix;
 
+    public MatrixWithOnes() {}
+
     public MatrixWithOnes(int n) {
        setMatrix(n);
     }
