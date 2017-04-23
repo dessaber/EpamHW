@@ -2,7 +2,7 @@ package javase01.t01.matrix;
 
 import java.util.Scanner;
 
-/** The class has byte matrix as a field. There parameterized constructor, methods to set, fill and output the matrix.
+/** The class has byte matrix as a field. There are parameterized constructor, methods to set, fill and output the matrix.
  *
  * @author m-levin 23.04.2017
  */
@@ -47,8 +47,9 @@ public class MatrixWithOnes {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        MatrixWithOnes matrixWithOnes;
         try {
-            MatrixWithOnes matrixWithOnes = new MatrixWithOnes(scanner.nextInt());
+            matrixWithOnes = new MatrixWithOnes(scanner.nextInt());
             matrixWithOnes.placeOnes();
             matrixWithOnes.showMatrix();
         } catch (Exception e) {

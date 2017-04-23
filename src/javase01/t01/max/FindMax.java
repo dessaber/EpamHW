@@ -31,7 +31,7 @@ public class FindMax {
             System.out.println("Input amount of real numbers first (gotta be > 0).");
             while (true) {
                 arrayLength = Integer.parseInt(reader.readLine());
-                if (arrayLength > 0 && arrayLength < Integer.MAX_VALUE)
+                if (arrayLength > 0)
                     break;
             }
             doubles = new double[arrayLength];
