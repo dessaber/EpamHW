@@ -4,8 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by m-levin on 23.04.2017.
+/** The class has static methods to create and traverse an array of real numbers.
+ *
+ * @author m-levin 23.04.17
  */
 
 public class FindMax {
@@ -14,6 +15,12 @@ public class FindMax {
         traverseArray(inputArray());
 
     }
+
+    /** The method creates an array using integer number as its length, then fills the array with real numbers.
+     *
+     * 23.04.17
+     * @return array with doubles
+     */
 
     public static double[] inputArray() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -38,6 +45,13 @@ public class FindMax {
 
         return doubles;
     }
+
+    /** On every iteration this method counts symmetric sum of two elements of the array and outputs the maximum sum.
+     *  If the array contains only one number, it will be the output.
+     *
+     * @param doubles array of real numbers
+     * 23.04.17
+     */
 
     public static void traverseArray(double[] doubles) {
         double currentMax;
