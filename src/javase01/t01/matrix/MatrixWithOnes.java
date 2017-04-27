@@ -51,6 +51,7 @@ public class MatrixWithOnes {
         Scanner scanner = new Scanner(System.in);
         MatrixWithOnes matrixWithOnes;
         try {
+            System.out.println("Input size of the matrix: ");
             matrixWithOnes = new MatrixWithOnes(scanner.nextInt());
             matrixWithOnes.placeOnes();
             matrixWithOnes.showMatrix();
