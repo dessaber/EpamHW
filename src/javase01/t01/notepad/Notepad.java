@@ -1,45 +1,44 @@
 package javase01.t01.notepad;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Created by m-levin on 24.04.2017.
  */
 public class Notepad {
 
-    private ArrayList<NotepadRecord> contents = new ArrayList<>();
+    private NotepadRecord[] contents = new NotepadRecord[2];
+    private int rowsCount = 0;
 
     /**
      * Adds a new record after the last record using NotepadRecord parameterized constructor
      * @param text What your record actually says
      */
     public void addRecord(String text) {
-        contents.add(new NotepadRecord(text));
+        if (rowsCount == contents.length) {
+            NotepadRecord[] newContents = new NotepadRecord[2*(contents.length)];
+            System.arraycopy(contents, 0, newContents, 0, contents.length);
+            contents = newContents;
+        }
+        contents[rowsCount] = new NotepadRecord(text);
+        rowsCount++;
     }
 
     /**
-     * User can choose a place to write in, but some rows might not be empty
-     * One can also make a lot of free space in between rows
-     * @param index Place to insert the record in
-     * @param text Record itself
-     */
-    public void addRecord(int index, String text) {
-        if (contents.size() <= index) {
-            while (index - contents.size() > 0)
-                addRecord("");
-            contents.add(index, new NotepadRecord(text));
-        } else if (contents.get(index).getText().equals("")) {
-            contents.add(index, new NotepadRecord(text));
-        } else
-            System.out.println("This row is not empty. Choose another space to write.");
-    }
-
-    /**
-     * Removes a record from specified row and leaves it open
+     * Removes a record from specified row, inserts the rest of the array in this position
      * @param index Row with what number you want to erase
      */
     public void removeRecord(int index) {
-        updateRecord(index, "");
+
+        if (index > contents.length - 1 && index < 0)
+            System.out.println("Wrong row number to update");
+        else {
+            System.arraycopy(contents, index + 1, contents, index, contents.length - index - 1);
+        }
+        contents[contents.length - 1] = null;
+        rowsCount--;
     }
 
     /**
@@ -48,32 +47,79 @@ public class Notepad {
      * @param text New record's text
      */
     public void updateRecord(int index, String text) {
-        contents.get(index).setText(text);
+        if (index > contents.length - 1 && index < 0)
+            System.out.println("Wrong row number to update");
+        else
+            contents[index].setText(text);
     }
 
     /**
-     * Simple output
+     * Simple output.
      */
     public void showRecords() {
-        for (int i = 0; i < contents.size(); ++i)
-            System.out.println(contents.get(i).getText());
+        System.out.println();
+        for (int i = 0; i < rowsCount; ++i)
+            if (contents[i].getText().equals(""))
+                System.out.println("");
+            else
+                System.out.println(contents[i].getText() + " " + contents[i].getTimePoint());
+        System.out.println();
     }
 
     /**
-     * Demonstration procedure
+     * This methods shows all available options.
+     */
+    public void showMenu() {
+        System.out.println("Available options (type to choose):");
+        System.out.println("1 - add a record");
+        System.out.println("2 - remove a record");
+        System.out.println("3 - update a record");
+        System.out.println("4 - show all records");
+        System.out.println("Type any non-digit symbol to close the program.");
+    }
+
+    /**
+     * Entry point represents console dialog.
      * @param args
      */
     public static void main(String[] args) {
 
+        System.out.println("Welcome to The Notepad!");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Notepad notepad = new Notepad();
-        notepad.addRecord("Hello");
-        notepad.addRecord("World");
-        notepad.addRecord("!!!");
-        notepad.showRecords();
-        notepad.removeRecord(1);
-        notepad.showRecords();
-        notepad.addRecord(5, "The end");
-        notepad.showRecords();
+        try {
+            int b;
+            while (true) {
+                notepad.showMenu();
+                b = Integer.parseInt(reader.readLine());
+                /* Could've used Strategy pattern here, but the task says: "Build TWO classes..." */
+                switch (b) {
+                    case 1:
+                        System.out.println("Type in your text: ");
+                        notepad.addRecord(reader.readLine());
+                        break;
+                    case 2:
+                        System.out.println("Type in index of the row:");
+                        notepad.removeRecord(Integer.parseInt(reader.readLine()));
+                        break;
+                    case 3:
+                        int c;
+                        System.out.println("Type in index of the row:");
+                        c = Integer.parseInt(reader.readLine());
+                        System.out.println("Type in your text: ");
+                        notepad.updateRecord(c, reader.readLine());
+                        break;
+                    case 4:
+                        notepad.showRecords();
+                        break;
+                    default:
+                        System.out.println("Wrong option.");
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("The program will be closed.");
+        }
     }
 }
 
