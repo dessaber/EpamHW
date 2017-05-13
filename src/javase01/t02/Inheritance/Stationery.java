@@ -14,7 +14,7 @@ public abstract class Stationery {
 
     private String name;
     private Color color;
-    private int cost;
+    private double cost;
 
     public static void main (String[] args) {
 
@@ -26,10 +26,12 @@ public abstract class Stationery {
 
     public static ArrayList<Stationery> equipKit () {
         ArrayList<Stationery> kit = new ArrayList<>();
-        kit.add(new Pen("An Erich Krause pen", Stationery.Color.BLUE, 12, 100));
-        kit.add(new Eraser("A Tukzar eraser", Stationery.Color.BLUE, true, 36));
-        kit.add(new Marker("A Proff marker", Stationery.Color.GREEN, 15, 70));
-        kit.add(new Stapler("A Citizen stapler", Stationery.Color.BLACK, 240));
+        kit.add(new Pen("Erich Krause pen", Color.BLUE, 100, 100));
+        kit.add(new Eraser("Tukzar eraser", Color.BLUE, true, 36));
+        kit.add(new Marker("Proff marker", Color.GREEN, 80, 70));
+        kit.add(new Stapler("Citizen stapler", Color.BLACK, 240));
+        kit.add(new Pen("Proff pen", Color.VIOLET, 90, 100));
+        kit.add(new Marker("EPAM marker", Color.BLUE, 70, 260));
 
         return kit;
     }
@@ -51,13 +53,14 @@ public abstract class Stationery {
         this.color = color;
     }
 
-    public int getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
+
 }
 
 abstract class WorkWithDocuments extends Stationery {}
@@ -79,16 +82,6 @@ abstract class Editing extends Stationery {
 }
 
 abstract class Writing extends Stationery {
-
-    private int length; // in centimeters
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
 
 }
 

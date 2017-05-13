@@ -11,13 +11,13 @@ import java.util.Objects;
 @TopSecret(name = "USSR's miliraty forces secret intel #548БНК14",
            classificationDate = "08/05/1967",
            secrecy = TopSecret.SecrecyLevel.HIGH)
-public class AtomicSubmarine {
+public class NuclearSubmarine {
 
     public static void main (String[] args) {
 
-        AtomicSubmarine s = new AtomicSubmarine("K-19", 200, 60_000);
+        NuclearSubmarine s = new NuclearSubmarine("K-19", 200, 60_000);
         s.go();
-        AtomicSubmarine.SubmarineEngine e = s.new SubmarineEngine("BM-A", 2000);
+        NuclearSubmarine.SubmarineEngine e = s.new SubmarineEngine("BM-A", 2000);
         System.out.println(e);
         s.setEngine(null);
         s.setEngine(e);
@@ -82,19 +82,19 @@ public class AtomicSubmarine {
     private int displacement; // in tons
     private SubmarineEngine engine;
 
-    public AtomicSubmarine() {
+    public NuclearSubmarine() {
         this("Just a submarine", 180, 50_000);
     }
 
-    public AtomicSubmarine(String name) {
+    public NuclearSubmarine(String name) {
         this(name, 180, 50_000);
     }
 
-    public AtomicSubmarine(String name, int length) {
+    public NuclearSubmarine(String name, int length) {
         this(name, length, 50_000);
     }
 
-    public AtomicSubmarine(String name, int length, int displacement) {
+    public NuclearSubmarine(String name, int length, int displacement) {
         this.name = name;
         this.length = length;
         this.displacement = displacement;
@@ -140,7 +140,7 @@ public class AtomicSubmarine {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AtomicSubmarine submarine = (AtomicSubmarine) o;
+        NuclearSubmarine submarine = (NuclearSubmarine) o;
         return getLength() == submarine.getLength() &&
                 getDisplacement() == submarine.getDisplacement() &&
                 Objects.equals(getName(), submarine.getName()) &&
